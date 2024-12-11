@@ -25,6 +25,15 @@ class Core
         template<typename F, typename... Args>
         ScheduledEvent set_timeout(double seconds, F function, Args... args)
         {
+            ScheduledEvent event = ScheduledEvent(false, seconds, function, args...);
+            this->scheduled_events.push_back(event);
+
+            return event;
+        }
+
+        template<typename F, typename... Args>
+        ScheduledEvent set_interval(double seconds, F function, Args... args)
+        {
             ScheduledEvent event = ScheduledEvent(true, seconds, function, args...);
             this->scheduled_events.push_back(event);
 
