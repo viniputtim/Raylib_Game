@@ -9,17 +9,29 @@ ScheduledEvent::~ScheduledEvent()
 
 void ScheduledEvent::call()
 {
-    if (this->start_time + delay <= GetTime())
+    if (this->start + this->seconds <= GetTime())
     {
-        this->callback();
+        this->function();
 
-        if (this->repeat)
+        if (this->recurring)
         {
-            this->start_time = GetTime();
+            this->start = GetTime();
         }
         else
         {
-            this->was_canceled = true;
+            this->canceled = true;
         }
     }
+}
+
+
+void ScheduledEvent::cancel()
+{
+    this->canceled = true;
+}
+
+
+bool ScheduledEvent::is_canceled()
+{
+    return this->canceled;
 }

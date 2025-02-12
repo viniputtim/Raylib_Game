@@ -14,6 +14,7 @@ class Scene
         Scene() {};
         Scene(Core* core) {};
         virtual ~Scene() {};
+
         virtual void check_events() {};
         virtual void update() {};
         virtual void draw() {};

@@ -1,54 +1,64 @@
 # ifndef CORE_HPP
 # define CORE_HPP
 
+
 # include <raylib.h>
 # include <functional>
-# include <vector>
 # include <map>
+# include <memory>
 # include <string>
+# include <vector>
 # include "utils/scheduled_event.hpp"
-# include "utils/resource_manager.hpp"
 # include "scenes/scene.hpp"
-# include "scenes/main_menu.hpp"
+# include "scenes/loading.hpp"
 
 
 class Core
 {
-    public:
-        ResourceManager resource_manager;
-
-        Core();
-        ~Core();
-        void run();
-        void change_scene(std::string scene_name);
-
-        template<typename F, typename... Args>
-        ScheduledEvent set_timeout(double seconds, F function, Args... args)
-        {
-            ScheduledEvent event = ScheduledEvent(false, seconds, function, args...);
-            this->scheduled_events.push_back(event);
-
-            return event;
-        }
-
-        template<typename F, typename... Args>
-        ScheduledEvent set_interval(double seconds, F function, Args... args)
-        {
-            ScheduledEvent event = ScheduledEvent(true, seconds, function, args...);
-            this->scheduled_events.push_back(event);
-
-            return event;
-        }
-
     private:
-        std::vector<ScheduledEvent> scheduled_events;
-        Scene* current_scene;
+        std::vector<std::shared_ptr<ScheduledEvent>> scheduled_events;
         std::map<std::string, std::function<void()>> scenes;
+        std::unique_ptr<Scene> scene;
 
+        void change_scene(std::string scene_name);
         void check_scheduled_events();
         void check_events();
         void update();
         void draw();
+
+        template<typename Function, typename... Args>
+        std::shared_ptr<ScheduledEvent> schedule_event(
+            Function function, double seconds, bool recurring, Args... args
+        )
+        {
+            std::shared_ptr<ScheduledEvent> scheduled_event =
+                std::make_shared<ScheduledEvent> (function, seconds, recurring, args...);
+
+            this->scheduled_events.push_back(scheduled_event);
+            return scheduled_event;
+        }
+
+    public:
+        Core();
+        ~Core();
+
+        void run();
+
+        template<typename Function, typename... Args>
+        std::shared_ptr<ScheduledEvent> schedule_once(
+            Function function, double seconds, Args... args
+        )
+        {
+           return schedule_event(function, seconds, false, args...);
+        }
+
+        template<typename Function, typename... Args>
+        std::shared_ptr<ScheduledEvent> schedule_interval(
+            Function function, double seconds, Args... args
+        )
+        {
+           return schedule_event(function, seconds, true, args...);
+        }
 };
 
 # endif

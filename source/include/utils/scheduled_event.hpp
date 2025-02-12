@@ -4,33 +4,32 @@
 
 # include <raylib.h>
 # include <functional>
-# include <utility>
 
 
 class ScheduledEvent
 {
+    private:
+        double start;
+        double seconds;
+        std::function<void()> function;
+        bool recurring;
+        bool canceled = false;
+
     public:
-        bool was_canceled;
-
-        template<typename F, typename... Args>
-        ScheduledEvent(bool repeat, double seconds, F function, Args... args)
+        template<typename Function, typename... Args>
+        ScheduledEvent(Function function, double seconds, bool recurring, Args... args)
         {
-            this->repeat = repeat;
-            this->start_time = GetTime();
-            this->delay = seconds;
-            this->callback = [func = std::forward<F> (function),
-                ...args = std::forward<Args> (args)]() {func(args...);};
+            this->function = [func = std::forward<Function> (function),
+                ...args =std::forward<Args> (args)]() {func(args...);};
+            this->seconds = seconds;
+            this->recurring = recurring;
+            this->start = GetTime();
         }
-
         ~ScheduledEvent();
+
         void call();
         void cancel();
-
-    private:
-        bool repeat;
-        double start_time;
-        double delay;
-        std::function<void()> callback;
+        bool is_canceled();
 };
 
 # endif
