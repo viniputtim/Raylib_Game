@@ -1,17 +1,17 @@
-# ifndef LOADING_HPP
-# define LOADING_HPP
+# ifndef MAIN_MENU_HPP
+# define MAIN_MENU_HPP
 
 
 # include "core.hpp"
 # include "scenes/scene.hpp"
 
 
-class Loading : public Scene
+class MainMenu : public Scene
 {
     public:
-        Loading();
-        Loading(Core* core);
-        ~Loading();
+        MainMenu();
+        MainMenu(Core* core);
+        ~MainMenu();
 
         void check_events() override;
         void update() override;

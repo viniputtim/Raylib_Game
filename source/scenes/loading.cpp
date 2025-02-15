@@ -21,7 +21,10 @@ Loading::~Loading()
 
 void Loading::check_events()
 {
-
+    if (IsMouseButtonReleased(0))
+    {
+        this->core->change_scene("main menu");
+    }
 }
 
 

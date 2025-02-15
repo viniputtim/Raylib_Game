@@ -3,7 +3,8 @@
 
 Core::Core()
 {
-    this->scenes["loading"] = [this]() {this->scene = std::make_unique<Loading> ();};
+    this->scenes["loading"] = [this]() {this->scene = std::make_unique<Loading> (this);};
+    this->scenes["main menu"] = [this]() {this->scene = std::make_unique<MainMenu> (this);};
 
     this->change_scene("loading");
 }
@@ -55,6 +56,7 @@ void Core::check_scheduled_events()
 void Core::check_events()
 {
     this->scene->check_events();
+
 }
 
 
@@ -67,8 +69,9 @@ void Core::update()
 void Core::draw()
 {
     BeginDrawing();
-    ClearBackground(RAYWHITE);
+
     this->scene->draw();
-    DrawFPS(0, 0);
+
+    DrawFPS(10, 10);
     EndDrawing();
 }

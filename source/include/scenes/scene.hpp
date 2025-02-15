@@ -12,7 +12,7 @@ class Scene
 {
     public:
         Scene() {};
-        Scene(Core* core) {};
+        Scene(Core* core) : core(core) {};
         virtual ~Scene() {};
 
         virtual void check_events() {};

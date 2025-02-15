@@ -11,6 +11,7 @@
 # include "utils/scheduled_event.hpp"
 # include "scenes/scene.hpp"
 # include "scenes/loading.hpp"
+# include "scenes/main_menu.hpp"
 
 
 class Core
@@ -20,7 +21,6 @@ class Core
         std::map<std::string, std::function<void()>> scenes;
         std::unique_ptr<Scene> scene;
 
-        void change_scene(std::string scene_name);
         void check_scheduled_events();
         void check_events();
         void update();
@@ -43,6 +43,7 @@ class Core
         ~Core();
 
         void run();
+        void change_scene(std::string scene_name);
 
         template<typename Function, typename... Args>
         std::shared_ptr<ScheduledEvent> schedule_once(
