@@ -9,7 +9,7 @@ Loading::Loading()
 
 Loading::Loading(Core* core) : Scene(core)
 {
-
+    this->raylib = std::make_unique<Surf> ("raylib.png", WHITE);
 }
 
 
@@ -37,4 +37,5 @@ void Loading::update()
 void Loading::draw()
 {
     ClearBackground(GREEN);
+    this->raylib->draw();
 }
