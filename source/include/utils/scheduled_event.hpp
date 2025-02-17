@@ -9,23 +9,23 @@
 class ScheduledEvent
 {
     private:
-        double start;
-        double seconds;
-        std::function<void()> function;
-        bool recurring;
-        bool canceled = false;
+        double start {0};
+        double seconds {0};
+        std::function<void()> function {[]() {}};
+        bool recurring {false};
+        bool canceled {false};
 
     public:
         template<typename Function, typename... Args>
-        ScheduledEvent(Function function, double seconds, bool recurring, Args... args)
-        {
-            this->function = [func = std::forward<Function> (function),
-                ...args =std::forward<Args> (args)]() {func(args...);};
-            this->seconds = seconds;
-            this->recurring = recurring;
-            this->start = GetTime();
-        }
-        ~ScheduledEvent();
+        ScheduledEvent(Function function, double seconds, bool recurring, Args... args) :
+            function(
+                [func = std::forward<Function> (function),
+                ...args = std::forward<Args> (args)]() {func(args...);}
+            ),
+            seconds(seconds),
+            recurring(recurring),
+            start(GetTime())
+        {}
 
         void call();
         void cancel();

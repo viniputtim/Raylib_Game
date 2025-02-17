@@ -11,13 +11,16 @@ Surf::Surf(std::string file_path, Color color)
 {
     this->image = LoadImage(TextFormat("../resources/graphics/%s", file_path.c_str()));
     this->texture = LoadTextureFromImage(this->image);
-    this->rect = std::make_shared<Rect> (this->texture.width, this->texture.height);
+    this->rect = std::make_shared<Rect> (Vector2(
+        static_cast<float> (this->texture.width), static_cast<float> (this->texture.height)
+    ));
     this->color = color;
 }
 
 Surf::~Surf()
 {
-
+    UnloadImage(this->image);
+    UnloadTexture(this->texture);
 }
 
 

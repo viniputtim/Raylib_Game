@@ -8,16 +8,15 @@
 class Rect
 {
     private:
-        int width = 0;
-        int height = 0;
-        int left = 0;
-        int top = 0;
+        int width {0};
+        int height {0};
+        int left {0};
+        int top {0};
 
     public:
         Rect();
-        Rect(int width, int height);
-        Rect(Rectangle rect);
-        ~Rect();
+        Rect(Vector2 size) : width(size.x), height(size.y) {};
+        Rect(Rectangle rect) : left(rect.x), top(rect.y), width(rect.width), height(rect.height) {};
 
         int get_width() const;
         int get_height() const;

@@ -3,15 +3,17 @@
 
 
 # include <raylib.h>
+
 # include <functional>
 # include <map>
 # include <memory>
 # include <string>
 # include <vector>
-# include "utils/scheduled_event.hpp"
+
 # include "scenes/scene.hpp"
 # include "scenes/loading.hpp"
 # include "scenes/main_menu.hpp"
+# include "utils/scheduled_event.hpp"
 
 
 class Core
@@ -31,16 +33,16 @@ class Core
             Function function, double seconds, bool recurring, Args... args
         )
         {
-            std::shared_ptr<ScheduledEvent> scheduled_event =
-                std::make_shared<ScheduledEvent> (function, seconds, recurring, args...);
-
+            std::shared_ptr<ScheduledEvent> scheduled_event {
+                std::make_shared<ScheduledEvent> (function, seconds, recurring, args...)
+            };
             this->scheduled_events.push_back(scheduled_event);
+
             return scheduled_event;
         }
 
     public:
         Core();
-        ~Core();
 
         void run();
         void change_scene(std::string scene_name);

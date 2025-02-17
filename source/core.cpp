@@ -10,12 +10,6 @@ Core::Core()
 }
 
 
-Core::~Core()
-{
-
-}
-
-
 void Core::change_scene(std::string scene_name)
 {
     this->scenes[scene_name]();
@@ -38,7 +32,7 @@ void Core::check_scheduled_events()
 {
     for (auto it = this->scheduled_events.begin(); it != this->scheduled_events.end();)
     {
-        std::shared_ptr<ScheduledEvent> event = *it;
+        std::shared_ptr<ScheduledEvent> event {*it};
 
         if (event->is_canceled())
         {
@@ -69,9 +63,7 @@ void Core::update()
 void Core::draw()
 {
     BeginDrawing();
-
     this->scene->draw();
-
     DrawFPS(10, 10);
     EndDrawing();
 }

@@ -7,39 +7,6 @@
 
 
 /*
-    C O N S T R U T O R E S    E    D E S T R U T O R E S
-*/
-
-
-Rect::Rect()
-{
-
-}
-
-
-Rect::Rect(int width, int height)
-{
-    this->width = width;
-    this->height = height;
-}
-
-
-Rect::Rect(Rectangle rect)
-{
-    this->width = static_cast<int> (rect.width);
-    this->height = static_cast<int> (rect.height);
-    this->left = static_cast<int> (rect.x);
-    this->top = static_cast<int> (rect.y);
-}
-
-
-Rect::~Rect()
-{
-
-}
-
-
-/*
     G E T    I N T S
 */
 

@@ -1,12 +1,6 @@
 # include "utils/scheduled_event.hpp"
 
 
-ScheduledEvent::~ScheduledEvent()
-{
-
-}
-
-
 void ScheduledEvent::call()
 {
     if (this->start + this->seconds <= GetTime())

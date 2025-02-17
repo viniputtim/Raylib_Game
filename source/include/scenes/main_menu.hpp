@@ -13,11 +13,13 @@ class MainMenu : public Scene
     private:
         RadarChart* radar_chart = new RadarChart(
             Vector2(GetScreenWidth() / 2, GetScreenHeight() / 2),
-            400,
-            {{"1 att", 10}, {"2 tec", 40}, {"3 sta", 50}, {"4 def", 60}, {"5 pow", 60}, {"6 vel", 45}},
+            200,
+            {{"att", 10}, {"tec", 40}, {"sta", 50}, {"def", 60}, {"pow", 60}, {"vel", 45}},
             100,
             BLUE,
-            BLACK
+            BLACK,
+            GetFontDefault(),
+            12
         );
 
     public:

@@ -14,7 +14,7 @@ class Surf
         Image image;
         Texture2D texture;
         std::shared_ptr<Rect> rect;
-        Color color = WHITE;
+        Color color {WHITE};
     public:
         Surf();
         Surf(std::string file_path, Color color);
