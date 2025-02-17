@@ -5,6 +5,7 @@
 # include <memory>
 # include "core.hpp"
 # include "scenes/scene.hpp"
+# include "utils/rect.hpp"
 # include "utils/surf.hpp"
 
 

@@ -10,6 +10,10 @@ Loading::Loading()
 Loading::Loading(Core* core) : Scene(core)
 {
     this->raylib = std::make_unique<Surf> ("raylib.png", WHITE);
+    this->raylib->get_rect()->set_center({
+        static_cast<float> (GetScreenWidth() / 2),
+        static_cast<float> (GetScreenHeight() / 2)
+    });
 }
 
 
