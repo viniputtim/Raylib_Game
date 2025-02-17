@@ -14,8 +14,10 @@ class MainMenu : public Scene
         RadarChart* radar_chart = new RadarChart(
             Vector2(GetScreenWidth() / 2, GetScreenHeight() / 2),
             400,
-            {50, 50, 50, 50, 50, 50},
-            100
+            {{"1 att", 10}, {"2 tec", 40}, {"3 sta", 50}, {"4 def", 60}, {"5 pow", 60}, {"6 vel", 45}},
+            100,
+            BLUE,
+            BLACK
         );
 
     public:
