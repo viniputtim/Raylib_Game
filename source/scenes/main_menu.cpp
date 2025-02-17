@@ -36,5 +36,6 @@ void MainMenu::update()
 
 void MainMenu::draw()
 {
-    ClearBackground(BLUE);
+    ClearBackground(RAYWHITE);
+    this->radar_chart->draw();
 }
