@@ -16,7 +16,7 @@ class RadarChart
         Vector2 center {0.0f, 0.0f};
         int radius {0};
         std::vector<std::pair<std::string, float>> values;
-        float max_value {0};
+        float max_value {0.0f};
         Color line_color {WHITE};
         Color label_color {WHITE};
         Font font {GetFontDefault()};
